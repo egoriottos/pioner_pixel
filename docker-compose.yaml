@@ -1,0 +1,36 @@
+version: '3.8'
+services:
+  postgres:
+    image: 'postgres:latest'
+    container_name: userDB
+    environment:
+      - 'POSTGRES_DB=userdb'
+      - 'POSTGRES_PASSWORD=user'
+      - 'POSTGRES_USER=user'
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./data/postgres-user-data:/var/lib/postgres-user-data/data
+
+  redis:
+    image: redis:latest
+    container_name: redis
+    restart: always
+    ports:
+      - "6379:6379"
+    environment:
+      - REDIS_PASSWORD=pass
+    command: >
+      redis-server --requirepass pass
+    volumes:
+      - ./data/redis:/data
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.17.22
+    container_name: elasticsearch
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - xpack.security.transport.ssl.enabled=false
+    ports:
+      - "9200:9200"

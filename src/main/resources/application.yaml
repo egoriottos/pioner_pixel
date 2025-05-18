@@ -1,0 +1,30 @@
+spring:
+  flyway:
+    enabled: true
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+  elasticsearch:
+    uris: http://localhost:9200
+  datasource:
+    username: user
+    password: user
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/userdb
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      password: pass
+  application:
+    name: pioner-pixel
+server:
+  port: 8080
+
+app:
+  security:
+    secret: "9a4f2c8d3b7a1e6f45c8a0b3f267d8b1d4e6f3c8a9d2b5f8e3a9c8b5f6v8a3d9"
+    expiration: "36000000"
+
+## http://localhost:8080/swagger-ui/index.html - swagger
